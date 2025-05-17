@@ -1,0 +1,30 @@
+name: Fun-with-Flags - CI
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  Vercel-Deploy:
+    runs-on: ubuntu-latest
+  steps:
+    - name: Repository checkout
+    uses: action/checkout@v3
+
+    - name: Install dependecies
+    uses: npm intall
+
+    - name: Build project
+    uses: npm run build
+
+    - name: Vercel Deploy
+    uses: amondnet/vercel-action@v25
+    with:
+      vercel-token: ${{ secrets.VERCEL_TOKEN }}
+      vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+      vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+      working-directory: ./
+

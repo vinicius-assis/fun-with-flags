@@ -9,17 +9,17 @@ on:
     branches: [main]
 
 jobs:
-  Vercel-Deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Repository checkout
-    run: action/checkout@v3
+      - name: Repository checkout
+        run: action/checkout@v3
 
-    - name: Install dependecies
-    rung: npm intall
+      - name: Install dependecies
+        run: npm intall
 
-    - name: Build project
-    rung: npm run build
+      - name: Build project
+        run: npm run build
 
-    - name: Vercel Deploy
-    run: amondnet/vercel-action@v25
+      - name: Vercel Deploy
+        run: amondnet/vercel-action@v25

@@ -2,6 +2,7 @@ name: Fun-with-Flags - CI
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_PROD_URL: ${{ secrets.VERCEL_PRODUCTION_DOMAIN }}
 
 on:
   push:
@@ -12,19 +13,13 @@ jobs:
     runs-on: ubuntu-latest
   steps:
     - name: Repository checkout
-    uses: action/checkout@v3
+    run: action/checkout@v3
 
     - name: Install dependecies
-    uses: npm intall
+    rung: npm intall
 
     - name: Build project
-    uses: npm run build
+    rung: npm run build
 
     - name: Vercel Deploy
-    uses: amondnet/vercel-action@v25
-    with:
-      vercel-token: ${{ secrets.VERCEL_TOKEN }}
-      vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-      vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-      working-directory: ./
-
+    run: amondnet/vercel-action@v25

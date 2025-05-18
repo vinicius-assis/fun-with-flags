@@ -40,7 +40,7 @@ const Card = ({
             <span>{capital}</span>
           </div>
           <div className="flex items-center gap-1">
-            <span className="font-semibold">Regiao:</span>
+            <span className="font-semibold">Região:</span>
             <span>{region}</span>
           </div>
           <div className="flex items-center gap-1">

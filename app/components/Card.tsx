@@ -22,7 +22,7 @@ const Card = ({
   flagData,
 }: CardProps) => {
   return (
-    <div className="h-full overflow-hidden bg-white rounded-lg shadow-lg">
+    <div className="h-full overflow-hidden bg-white rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all ease-in-out">
       <div className="aspect-video w-full">
         <Image
           src={flagData.svg || "/flag-placeholder.svg"}

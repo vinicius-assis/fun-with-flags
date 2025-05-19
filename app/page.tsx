@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { countriesApi } from "./services";
 import Link from "next/link";
-import { Card, Grid } from "./components";
+import { Card, Grid, Search } from "./components";
 
 type CountriesProps = {
   cca3: string;
@@ -21,6 +21,7 @@ type CountriesProps = {
 export default function Home() {
   const [countries, setCountries] = useState<CountriesProps[]>([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
   const [error, setError] = useState<unknown>(null);
 
   useEffect(() => {
@@ -44,22 +45,35 @@ export default function Home() {
     a.name.common.localeCompare(b.name.common, "en-US")
   );
 
+  const filteredCountries = sortedCountries.filter(({ name }) =>
+    name.common.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
-    <Grid>
-      {sortedCountries.map(
-        ({ cca3: id, name, capital, region, population, flags }, idx) => (
-          <Link key={id} href={`/country/${id}`}>
-            <Card
-              index={idx}
-              name={name.common}
-              capital={capital?.[0] ?? ""}
-              region={region}
-              population={population}
-              flagData={flags}
-            />
-          </Link>
-        )
-      )}
-    </Grid>
+    <>
+      <div className="mb-8">
+        <Search
+          count={filteredCountries.length}
+          search={search}
+          setSearch={setSearch}
+        />
+      </div>
+      <Grid>
+        {filteredCountries.map(
+          ({ cca3: id, name, capital, region, population, flags }, idx) => (
+            <Link key={id} href={`/country/${id}`}>
+              <Card
+                index={idx}
+                name={name.common}
+                capital={capital?.[0] ?? ""}
+                region={region}
+                population={population}
+                flagData={flags}
+              />
+            </Link>
+          )
+        )}
+      </Grid>
+    </>
   );
 }

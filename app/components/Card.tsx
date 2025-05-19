@@ -1,11 +1,12 @@
 import Image from "next/image";
+import { formatNumber } from "../utils";
 
 type CardProps = {
   index: number;
   name: string;
   capital: string;
   region: string;
-  population: string;
+  population: number;
   flagData: {
     svg: string;
     alt: string;
@@ -20,7 +21,6 @@ const Card = ({
   population,
   flagData,
 }: CardProps) => {
-  const [populationValue] = population ?? [];
   return (
     <div className="h-full overflow-hidden bg-white rounded-lg shadow-lg">
       <div className="aspect-video w-full">
@@ -43,7 +43,8 @@ const Card = ({
             <span className="font-semibold">Região:</span> {region}
           </div>
           <div>
-            <span className="font-semibold">Population:</span> {populationValue}
+            <span className="font-semibold">Population:</span>{" "}
+            {formatNumber(population)}
           </div>
         </div>
       </div>

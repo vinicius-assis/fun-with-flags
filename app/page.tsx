@@ -40,9 +40,13 @@ export default function Home() {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error?.toString()}</div>;
 
+  const sortedCountries = countries.sort((a, b) =>
+    a.name.common.localeCompare(b.name.common, "en-US")
+  );
+
   return (
     <Grid>
-      {countries.map(
+      {sortedCountries.map(
         ({ cca3: id, name, capital, region, population, flags }, idx) => (
           <Link key={id} href={`/country/${id}`}>
             <Card
@@ -50,7 +54,7 @@ export default function Home() {
               name={name.common}
               capital={capital?.[0] ?? ""}
               region={region}
-              population={population.toString()}
+              population={population}
               flagData={flags}
             />
           </Link>

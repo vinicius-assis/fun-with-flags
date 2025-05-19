@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { countriesApi } from "./services";
 import Link from "next/link";
-import { Card, Grid, Search, Select } from "./components";
+import { Card, Grid, Error, Loading, Search, Select } from "./components";
 
 type CountriesProps = {
   cca3: string;
@@ -23,7 +23,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState("All regions");
-  const [error, setError] = useState<unknown>(null);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -39,8 +39,8 @@ export default function Home() {
     fetchCountries();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error?.toString()}</div>;
+  if (loading) return <Loading text="Discovering countries..." />;
+  if (error) return <Error text={error} />;
 
   const regions = [
     "All regions",

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { formatNumber } from "@/app/utils";
+import { Error, Loading } from "@/app/components";
 
 type Params = {
   id: string;
@@ -35,7 +36,7 @@ export default function Country() {
   const [id, setId] = useState<string | null>();
   const [country, setCountry] = useState<DetailCountry>();
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<unknown>(null);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     if (params?.id && params.id !== id) {
@@ -59,8 +60,8 @@ export default function Country() {
     fetchCountries();
   }, [id]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error?.toString()}</div>;
+  if (loading) return <Loading text="Visiting country..." />;
+  if (error) return <Error text={error} />;
 
   const {
     flags,

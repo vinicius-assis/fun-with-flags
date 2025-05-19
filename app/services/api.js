@@ -2,8 +2,7 @@ const ApiClient = (baseUrl) => ({
   async get(endpoint) {
     try {
       const response = await fetch(`${baseUrl}${endpoint}`);
-      if (!response.ok)
-        return [null, `HTTP error! Status: ${response.statusText}`];
+      if (!response.ok) return [null, `HTTP error! Status: ${response.status}`];
       const data = await response.json();
       return [data, null];
     } catch (error) {

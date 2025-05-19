@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import { countriesApi } from "./services";
+import { countriesApi } from "@/services";
 import Link from "next/link";
-import { Card, Grid, Error, Loading, Search, Select } from "./components";
+import { Card, Grid, Error, Loading, Search, Select } from "@/components";
 
 type CountriesProps = {
   cca3: string;

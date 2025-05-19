@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import { countriesApi } from "@/app/services";
+import { countriesApi } from "@/services";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { formatNumber } from "@/app/utils";
-import { Error, Loading } from "@/app/components";
+import { formatNumber } from "@/utils";
+import { Error, Loading } from "@/components";
 
 type Params = {
   id: string;
